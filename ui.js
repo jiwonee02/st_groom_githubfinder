@@ -1,10 +1,12 @@
 class UI {
   constructor() {
     this.profile = document.getElementById("profile");
+    this.spinner = document.getElementById("loading-spinner");
   }
 
   // Display profile in UI
   showProfile(user) {
+    this.hideSpinner(); // 프로필을 보여줄 때 Spinner 숨기기
     this.profile.innerHTML = `
         <div class="card card-body mb-3">
           <div class="row">
@@ -59,22 +61,15 @@ class UI {
 
   // Show alert message
   showAlert(message, className) {
-    // Clear any remaining alerts
+    this.hideSpinner(); // 오류 발생 시 Spinner 숨기기
     this.clearAlert();
-    // Create div
     const div = document.createElement("div");
-    // Add classes
     div.className = className;
-    // Add text
     div.appendChild(document.createTextNode(message));
-    // Get parent
     const container = document.querySelector(".searchContainer");
-    // Get search box
     const search = document.querySelector(".search");
-    // Insert alert
     container.insertBefore(div, search);
 
-    // Timeout after 3 sec
     setTimeout(() => {
       this.clearAlert();
     }, 3000);
@@ -92,5 +87,15 @@ class UI {
   // Clear profile
   clearProfile() {
     this.profile.innerHTML = "";
+  }
+
+  // Show spinner
+  showSpinner() {
+    this.spinner.style.display = "block";
+  }
+
+  // Hide spinner
+  hideSpinner() {
+    this.spinner.style.display = "none";
   }
 }

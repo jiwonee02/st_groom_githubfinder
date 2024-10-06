@@ -12,6 +12,9 @@ searchUser.addEventListener("keyup", (e) => {
   const userText = e.target.value;
 
   if (userText !== "") {
+    // Show spinner
+    ui.showSpinner();
+
     // Make http call
     github.getUser(userText).then((data) => {
       if (data.profile.message === "Not Found") {
@@ -26,5 +29,7 @@ searchUser.addEventListener("keyup", (e) => {
   } else {
     // Clear profile
     ui.clearProfile();
+    // Hide spinner if input is cleared
+    ui.hideSpinner();
   }
 });
